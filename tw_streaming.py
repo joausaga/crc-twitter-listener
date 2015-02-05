@@ -61,7 +61,7 @@ if __name__ == '__main__':
         if os.path.isfile(fname):
             file_exists = True
         f_output = codecs.open("output.csv", "a", encoding="ascii")
-        if !file_exists:
+        if not file_exists:
             f_output.write("\"date\",\"id\",\"keyword\",\"user_handler\",\"text\",\"url\"\n")
         l = StdOutListener(f_output)
         auth = OAuthHandler(consumer_key, consumer_secret)
