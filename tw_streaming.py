@@ -17,6 +17,8 @@ consumer_key = config.get('apikey', 'key')
 consumer_secret = config.get('apikey', 'secret')
 access_token = config.get('token', 'token')
 access_token_secret = config.get('token', 'secret')
+output_path = config.get('output', 'path')
+output_fname = config.get('output','name')
 
 class StdOutListener(StreamListener):
     
@@ -25,11 +27,14 @@ class StdOutListener(StreamListener):
         self.f = f
         self.url = "http://www.twitter.com"
         self.keywords = [{"id":"obamacare","terms":["obamacare"]},
-                         {"id":"college","terms":["tuition price cost", "colleges universities college university"]},
-                         {"id":"k-12","terms":["k-12", "public education"]},
-                         {"id":"immigrant","terms":["undocumented immigrants immigrant", "service services", "access"]},
-                         {"id":"marijuana","terms":["law laws regulation regulations", "marijuana", "recreational"]},
-                         {"id":"gay","terms":["marriage", "rights law laws", "gay same-sex partners"]}]
+                         {"id":"college",
+                          "terms":["tuition price cost fee charge expenditure affordable affordability affordably expense", 
+                                   "colleges universities college university"]},
+                         {"id":"k-12","terms":["k-12 elementary education"]},
+                         {"id":"immigrant","terms":["undocumented", "immigrants immigrant", 
+                                                    "service services assistance benefit benefits supply"]},
+                         {"id":"marijuana","terms":["law laws regulation regulations policy policies", "marijuana cannabis"]},
+                         {"id":"gay","terms":["marriage wedding", "privilege license rights law laws", "gay homosexual same-sex"]}]
     
     def on_status(self, status):
         for keyword in self.keywords:
@@ -45,7 +50,7 @@ class StdOutListener(StreamListener):
                 url_status = self.url + "/" + status.author.screen_name + "/status/" + status.id_str
                 self.f.write("\"%s\",\"%s\",\"%s\",\"@%s\",\"%s\",\"%s\"\n" % (status.created_at,status.id_str,keyword.get("id"),
                                                                                status.author.screen_name,
-                                                                               status.text.encode("ascii","ignore"),
+                                                                               tw_text,
                                                                                url_status))
                 break
         return True
@@ -55,12 +60,13 @@ class StdOutListener(StreamListener):
         return True  # To continue listening
 
 if __name__ == '__main__':
+    f_output = None
     try:
-        fname = "output.csv"
+        fname = os.path.join(output_path,output_fname)
         file_exists = False
         if os.path.isfile(fname):
             file_exists = True
-        f_output = codecs.open("output.csv", "a", encoding="ascii")
+        f_output = codecs.open(fname, "a", encoding="ascii")
         if not file_exists:
             f_output.write("\"date\",\"id\",\"keyword\",\"user_handler\",\"text\",\"url\"\n")
         l = StdOutListener(f_output)
@@ -69,7 +75,8 @@ if __name__ == '__main__':
         stream = Stream(auth, l)
         stream.filter(locations=[-124.24,32.30,-120,42])  # Only tweets from California
     except KeyboardInterrupt:
-        f_output.close()
+        if f_output:
+            f_output.close()
 
 #California Latitude-Longitude
 #SW: -124.24, 32.30
