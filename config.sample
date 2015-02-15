@@ -1,7 +1,19 @@
-[apikey]
+[app_location]
+key = your_api_key
+secret = your_api_secret
+token = your_access_token
+token_secret = your_access_secret
+
+[app_search]
 key = your_api_key
 secret = your_api_secret
 
-[token]
-token = your_access_token
-secret = your_access_secret
+[output]
+path = ""
+name = tweets_crc_topic.csv
+cal = tweets_crc_topic_ca.csv
+summary = summary_executions.txt
+
+[search_engine]
+max_page = 100
+max_tweets = 10000000
