@@ -95,7 +95,7 @@ def tweet_already_saved(db_tweets, topic, tweet_id):
         return False
 
 
-def to_unicode(obj, encoding="ascii"):
+def to_unicode(obj, encoding="utf-8"):
     if isinstance(obj, basestring):
         if not isinstance(obj, unicode):
             obj = unicode(obj, encoding)
@@ -104,7 +104,7 @@ def to_unicode(obj, encoding="ascii"):
 
 def format_text(text):
     u_text = to_unicode(text)
-    tw_text = u_text.encode("ascii", "ignore")
+    tw_text = u_text.encode("utf-8", "ignore")
     tw_text = tw_text.replace('\n', ' ').replace('\r', '').replace('\"', '\'')
     return tw_text
 
@@ -156,9 +156,9 @@ def save_tweet_file(output_file, tweet_dict):
 
 def open_output_file(fname):
     if os.path.isfile(fname):
-        return codecs.open(fname,"a", encoding="ascii")
+        return codecs.open(fname,"a", encoding="utf-8")
     else:
-        f = codecs.open(fname,"w", encoding="ascii")
+        f = codecs.open(fname,"w", encoding="utf-8")
         f.write("\"date\",\"id\",\"keyword\",\"location\",\"text\",\"lang\",\"source\",\"rt_count\",\"fv_count\","
                 "\"comments_count\",\"url\",\"latitude\",\"longitude\",\"author_handler\",\"followers\",\"friends\","
                 "\"author_tw_count\",\"author_location\",\"author_description\"\n")
@@ -223,9 +223,9 @@ def get_state_name(states_table, state_code):
 
 def save_ca_tweets(fname_ca, ca_tweets):
     if os.path.isfile(fname_ca):
-        f= codecs.open(fname_ca,"a", encoding="ascii")
+        f= codecs.open(fname_ca,"a", encoding="utf-8")
     else:
-        f = codecs.open(fname_ca,"w", encoding="ascii")
+        f = codecs.open(fname_ca,"w", encoding="utf-8")
         f.write("\"date\",\"id\",\"keyword\",\"text\",\"lang\",\"source\",\"rt_count\",\"fv_count\",\"comments_count\","
                 "\"location\",\"url\",\"latitude\",\"longitude\",\"author_handler\",\"followers\",\"friends\","
                 "\"author_tw_count\",\"author_location\",\"author_description\"\n")
