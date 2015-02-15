@@ -1,0 +1,6 @@
+obamacare,obamacare OR affordable care act
+college,(price OR fee OR fees OR affordable OR affordability OR expense OR expenditure OR cost OR expenses OR costs) AND (tuition OR university OR universities OR college OR colleges)
+k_12,(quality OR condition) AND (k-12 education OR elementary education OR elementary school)
+immigrant,undocumented AND (immigrant OR immigrants) AND (service OR services OR assistance OR benefit OR benefits OR supply OR supplies) AND (access OR admission)
+marijuana,(marijuana OR cannabis OR pot OR weed) AND (laws OR law OR regulation OR regulations OR policy OR policies OR tax OR taxing)
+gay,(gay OR homosexual OR same-sex partner) AND (marriage OR weeding) AND (rights OR law OR laws OR license OR licenses OR privilege OR privileges)
