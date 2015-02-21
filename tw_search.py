@@ -12,8 +12,8 @@ import traceback
 import tweepy
 
 
-logger = logging.getLogger('tw_streaming')
-handler = logging.FileHandler('tw_streaming.log')
+logger = logging.getLogger('tw_search')
+handler = logging.FileHandler('tw_search.log')
 logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
